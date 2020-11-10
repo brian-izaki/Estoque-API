@@ -1,0 +1,35 @@
+{
+  "name": "estoque-api",
+  "version": "0.0.1",
+  "description": "API para gerenciamento de estoque",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brian-izaki/Estoque-API.git"
+  },
+  "keywords": [
+    "api",
+    "node",
+    "mongodb",
+    "express"
+  ],
+  "author": "Brian Kazuyoshi Izaki, Gustavo Ryusuke Takeda, Leandro Marcello Gregorio, Samuel da Silva",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brian-izaki/Estoque-API/issues"
+  },
+  "homepage": "https://github.com/brian-izaki/Estoque-API#readme",
+  
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-load": "^1.1.16",
+    "method-override": "^3.0.0",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.10.13"
+  }
+}
