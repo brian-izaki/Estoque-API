@@ -17,8 +17,14 @@ Node.Js, Express e MongoDB.
   - quantidadeEstoque number;
   - quantidadeMinimaEstoque number;
   - created
+- pedidos
+  - pedinte String;
+  - quantidade Number;
+  - created Date;
+  - dbref Produto;
 - categoria 
   - descricao
+
 
 ### Validadores: 
 
