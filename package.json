@@ -22,7 +22,6 @@
     "url": "https://github.com/brian-izaki/Estoque-API/issues"
   },
   "homepage": "https://github.com/brian-izaki/Estoque-API#readme",
-  
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
