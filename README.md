@@ -1,6 +1,6 @@
 # Estoque-API
 Projeto acadêmico de uma API REST para estoque de produtos.
-Node.Js, Express e MongoDB
+Node.Js, Express e MongoDB.
 
 ---
 ## Requisitos mínimos do projeto acadêmico
@@ -28,3 +28,5 @@ Node.Js, Express e MongoDB
   - quantidade em estoque nunca pode ser negativo
   - quantidade mínima em estoque deve ser maior ou igual a 1.
   - todos os atributos (exceto os que tem default, devem ser obrigatórios (required))
+
+teste do pull 
