@@ -10,10 +10,13 @@ module.exports = (app) => {
         'qtdEstoque': {
             type: Number,
             required: true,
+            min: [0, 'Valor deve ser sempre positivo']
         },
         'qtdMinEstoque': {
             type: Number,
-            required: true
+            required: true,
+            min: [1, 'Deve conter 1 ou mais produtos em estoque']
+            
         },
         'created': {
             type: Date,
