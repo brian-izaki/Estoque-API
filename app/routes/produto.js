@@ -6,5 +6,4 @@ module.exports = function(app) {
     app.get('/produto/:id', controller.obtemProduto);
     app.put('/produto', controller.alteraProduto);
     app.delete('/produto/:id', controller.removeProduto);
-
 }

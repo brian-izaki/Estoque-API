@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-module.exports = () => {
+module.exports = (app) => {
     const schema = mongoose.Schema({
         'dbref': {
             type: mongoose.Schema.ObjectId,
