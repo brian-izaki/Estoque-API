@@ -2,10 +2,10 @@ module.exports = function (app) {
 
   const controller = {};
 
-  const estoque = app.models.Estoque;
+  const estoques = app.models.Estoque;
 
   controller.salvarEstoque = (req, res) => {
-    estoque
+    estoques
       .create(req.body)
       .then(
         (sucesso) => {
@@ -43,7 +43,7 @@ module.exports = function (app) {
 
   controller.removeEstoque = (req, res) => {
     var _id = req.params._id;
-    estoque.remove({ "_id": _id }).exec().then(
+    estoques.remove({ "_id": _id }).exec().then(
       (estoque) => {
         res.status(204).json(estoque);
       },
