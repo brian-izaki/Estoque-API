@@ -17,16 +17,19 @@ module.exports = function (app) {
       )
   }
 
-  controller.listarEstoque = (req, res) => {
-    estoque.find({}).exec().then(
-      (sucess) => {
-        res.status(200).json(sucess)
-      },
-      (error) => {
-        res.status(500).json(error)
-      }
-    )
-  }
+  controller.listaEstoque = function(req, res) {
+    estoque.find().exec().then(
+        // em caso de sucesso
+        function(estoque) {
+            res.status(200).json(estoque);
+        },
+        // em caso de erro
+        function(erro) {
+            console.error(erro);
+            res.status(500).json(erro);
+        }
+    );
+}
 
   controller.alteraEstoque = (req, res) => {
     var _id = req.body._id;
