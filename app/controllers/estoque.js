@@ -45,7 +45,7 @@ module.exports = function (app) {
     var _id = req.params._id;
     estoque.remove({ "_id": _id }).exec().then(
       (estoque) => {
-        res.status(204).end();
+        res.status(204).json(estoque);
       },
       (erro) => {
         console.error(erro);

@@ -3,6 +3,6 @@ module.exports = function(app) {
     app.post('/estoque', controller.salvarEstoque);
     // app.get('/Estoque', controller.listaEstoque);
     // app.get('/Estoque/:id', controller.obtemEstoque);
-    app.put('/Estoque', controller.alteraEstoque);
-    app.delete('/Estoque/:id', controller.removeEstoque);
+    app.put('/estoque', controller.alteraEstoque);
+    app.delete('/estoque/:id', controller.removeEstoque);
 }
