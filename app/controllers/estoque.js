@@ -45,8 +45,8 @@ module.exports = function (app) {
   }
 
   controller.obtemEstoque = function(req, res) {
-    var _id = req.params.id;
-    estoque.findById(_id).exec().then(
+    var _id = req.params._id;
+    estoque.findById(_id, req.body).exec().then(
         // sucesso
         function(estoque) {
             if (!estoque) {
