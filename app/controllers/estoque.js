@@ -44,6 +44,24 @@ module.exports = function (app) {
     );
   }
 
+  controller.obtemEstoque = function(req, res) {
+    var _id = req.params.id;
+    estoque.findById(_id).exec().then(
+        // sucesso
+        function(estoque) {
+            if (!estoque) {
+                res.status(404).end();
+            } else {
+                res.status(200).json(estoque);
+            }
+        },
+        // erro
+        function(erro) {
+            console.error(erro);
+            res.status(500).json(erro);
+        }
+    );
+}
 
   return controller;
 }
