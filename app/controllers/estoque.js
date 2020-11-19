@@ -61,7 +61,19 @@ module.exports = function (app) {
             res.status(500).json(erro);
         }
     );
-}
+  }
+
+  controller.removeEstoque = (req, res) => {
+    const _id = req.params.id;
+    retirada.remove({_id}).exec().then(
+      (sucess) => {
+        res.status(200).json(sucess)
+      },
+      (error) => {
+        res.status(500).json(error)
+      }
+    )
+  }
 
   return controller;
 }
