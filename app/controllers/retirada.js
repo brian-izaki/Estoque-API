@@ -41,20 +41,33 @@ module.exports = function (app){
     )
   }
 
-  controller.alteraRetirada = (req, res) => {
-    const _id = req.body._id;
-    retirada.findByIdAndUpdate(_id, req.body).exec().then(
-      (sucess) => {
-        if (!sucess){
-          res.status(404).json(sucess)
-        } else{
-          res.status(200).json(sucess)
-        }
-      },
-      (error) => {
-        res.status(500).json(error)
+  controller.alteraRetirada = async (req, res) => {
+    const {_id, motivo, dbRefProduto, quantidade} = req.body;
+
+    try {
+      // pesquisa pelo id
+      let findRetirada = await retirada.findById(_id).exec();
+      // verifica se o id existe 
+      if (!findRetirada){
+        res.status(404).json({"message": "retirada não encontrada"});
+        return;
       }
-    );
+
+      // começa a alteração
+      let documentUpdate = {
+        motivo,
+        dbRefProduto,
+        quantidade,
+        updated: Date.now()
+      };
+      
+      let updated = await retirada.updateOne({ _id }, documentUpdate);
+      res.status(200).json(updated);
+      
+    } catch (error) {
+      res.status(500).json(error);
+    }
+
   }
 
   controller.removeRetirada = (req, res) => {

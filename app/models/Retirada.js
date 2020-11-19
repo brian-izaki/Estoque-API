@@ -5,7 +5,7 @@ const schema = mongoose.Schema({
     type: String,
     required: true,
   },
-  "dbrefProduto": {
+  "dbRefProduto": {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Produto',
     required: true
@@ -18,7 +18,11 @@ const schema = mongoose.Schema({
   "created": {
     type: Date,
     default: Date.now()
+  }, 
+  "updated": {
+    type: Date,
+    default: Date.now()
   }
 });
-
+ 
 module.exports = app => mongoose.model('Retirada', schema);
