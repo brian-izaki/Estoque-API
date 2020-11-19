@@ -65,7 +65,7 @@ module.exports = function (app) {
 
   controller.removeEstoque = (req,res) => {
     var _id = req.params.id;
-    estoque.remove({_id}).exec().then(
+    estoque.findByIdAndRemove(_id, req.params).exec().then(
       (sucess) => {
         res.status(200).json(sucess)
       },
