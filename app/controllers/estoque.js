@@ -44,36 +44,5 @@ module.exports = function (app) {
     );
   }
 
-  controller.obtemEstoque = function(req, res) {
-    var _id = req.params._id;
-    estoque.findById(_id, req.body).exec().then(
-        // sucesso
-        function(estoque) {
-            if (!estoque) {
-                res.status(404).end();
-            } else {
-                res.status(200).json(estoque);
-            }
-        },
-        // erro
-        function(erro) {
-            console.error(erro);
-            res.status(500).json(erro);
-        }
-    );
-  }
-
-  controller.removeEstoque = (req, res) => {
-    const _id = req.params.id;
-    retirada.remove({_id}).exec().then(
-      (sucess) => {
-        res.status(200).json(sucess)
-      },
-      (error) => {
-        res.status(500).json(error)
-      }
-    )
-  }
-
   return controller;
 }
