@@ -17,19 +17,19 @@ module.exports = function (app) {
       )
   }
 
-  controller.listaEstoque = function(req, res) {
+  controller.listaEstoque = function (req, res) {
     estoque.find().exec().then(
-        // em caso de sucesso
-        function(estoque) {
-            res.status(200).json(estoque);
-        },
-        // em caso de erro
-        function(erro) {
-            console.error(erro);
-            res.status(500).json(erro);
-        }
+      // em caso de sucesso
+      function (estoque) {
+        res.status(200).json(estoque);
+      },
+      // em caso de erro
+      function (erro) {
+        console.error(erro);
+        res.status(500).json(erro);
+      }
     );
-}
+  }
 
   controller.alteraEstoque = (req, res) => {
     var _id = req.body._id;
@@ -43,6 +43,25 @@ module.exports = function (app) {
       }
     );
   }
+
+  controller.obtemEstoque = function(req, res) {
+    var _id = req.params.id;
+    estoque.findById(_id, req.body).exec().then(
+        // sucesso
+        function(estoque) {
+            if (!estoque) {
+                res.status(404).end();
+            } else {
+                res.status(200).json(estoque);
+            }
+        },
+        // erro
+        function(erro) {
+            console.error(erro);
+            res.status(500).json(erro);
+        }
+    );
+}
 
   return controller;
 }
