@@ -46,9 +46,9 @@ module.exports = function (app){
 
     try {
       // pesquisa pelo id
-      let findRetirada = await retirada.findById(_id).exec();
+      let temRetirada = await retirada.findById(_id).exec();
       // verifica se o id existe 
-      if (!findRetirada){
+      if (!temRetirada){
         res.status(404).json({"message": "retirada não encontrada"});
         return;
       }
