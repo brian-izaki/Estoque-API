@@ -2,11 +2,11 @@ module.exports = function(app) {
     /// cria a variável que vai conter as funções da controller
     var controller = {};
     // cria variável que irá acessar a model
-    var contato = app.models.Produto;
+    var produto = app.models.Produto;
 
     // cria a função de cadastrar produto
     controller.salvarProduto = function(req, res) {
-        contato.create(req.body).then(
+        produto.create(req.body).then(
             function(produto) {
                 res.status(201).json(produto);
             },
@@ -54,7 +54,7 @@ module.exports = function(app) {
     // remove produtos cadastrados
     controller.removeProduto = function(req, res) {
         var _id = req.params.id;
-        contato.remove({ "_id": _id }).exec().then(
+        produto.remove({ "_id": _id }).exec().then(
             // em caso de sucesso
             function(produto) {
                 res.status(204).end();
@@ -71,7 +71,7 @@ module.exports = function(app) {
 
     controller.obtemProduto = function(req, res) {
         var _id = req.params.id;
-        contato.findById(_id).populate('dbref').exec().then(
+        produto.findById(_id).populate('dbref').exec().then(
             // sucesso
             function(produto) {
                 if (!produto) {
