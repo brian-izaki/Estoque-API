@@ -18,17 +18,26 @@ module.exports = function (app) {
   }
 
   controller.listaEstoque = function (req, res) {
-    estoque.find().exec().then(
-      // em caso de sucesso
-      function (estoque) {
-        res.status(200).json(estoque);
-      },
-      // em caso de erro
-      function (erro) {
-        console.error(erro);
-        res.status(500).json(erro);
+    estoque
+    .find()
+    .populate({
+      path: 'dbref',
+      populate: {
+        path: 'dbref'
       }
-    );
+    })
+    .exec()
+    .then(
+        // em caso de sucesso
+        function (estoque) {
+          res.status(200).json(estoque);
+        },
+        // em caso de erro
+        function (erro) {
+          console.error(erro);
+          res.status(500).json(erro);
+        }
+      );
   }
 
   controller.alteraEstoque = async (req, res) => {
@@ -62,28 +71,37 @@ module.exports = function (app) {
 
   controller.obtemEstoque = function (req, res) {
     var _id = req.params.id;
-    estoque.findById(_id).exec().then(
-      // sucesso
-      function (estoque) {
-        if (!estoque) {
-          res.status(404).end();
-        } else {
-          res.status(200).json(estoque);
+    estoque
+      .findById(_id)
+      .populate({
+        path: 'dbref', 
+        populate: {
+          path: 'dbref'
         }
-      },
-      // erro
-      function (erro) {
-        console.error(erro);
-        res.status(500).json(erro);
-      }
-    );
+      })
+      .exec()
+      .then(
+        // sucesso
+        function (estoque) {
+          if (!estoque) {
+            res.status(404).end();
+          } else {
+            res.status(200).json(estoque);
+          }
+        },
+        // erro
+        function (erro) {
+          console.error(erro);
+          res.status(500).json(erro);
+        }
+      );
   }
 
   controller.removeEstoque = (req,res) => {
     var _id = req.params.id;
     estoque.findByIdAndRemove(_id, req.params).exec().then(
       (sucess) => {
-        res.status(200).json(sucess)
+        res.status(204).end()
       },
       (error) => {
         res.status(500).json(error)
