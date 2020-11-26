@@ -44,23 +44,29 @@ module.exports = function (app) {
     );
   }
 
-  controller.obtemEstoque = function (req, res) {
-    var _id = req.params.id;
-    estoque.findById(_id).exec().then(
-      // sucesso
-      function (estoque) {
-        if (!estoque) {
-          res.status(404).end();
-        } else {
-          res.status(200).json(estoque);
-        }
-      },
-      // erro
-      function (erro) {
-        console.error(erro);
-        res.status(500).json(erro);
+  controller.obtemEstoque = async (req, res) => {
+    const {_id, dbref, qtdEstoque, qtdMinEstoque} = req.body;
+
+    try {
+      let temEstoque = await estoque.findById(_id).exec();
+
+      if(!temEstoque){
+        res.status(404).json({"message": "Produto não se encontra em estoque!"});
       }
-    );
+
+      let documentUpdate = {
+        dbref,
+        qtdEstoque,
+        qtdMinEstoque,
+        updated: Date.now()
+      }
+
+      let updated = await estoque.updateOne({_id}, documentUpdate);
+      res.status(200).json(updated);
+      
+    }catch(error){
+      res.status(500).json(error);
+    }
   }
 
   controller.removeEstoque = (req,res) => {

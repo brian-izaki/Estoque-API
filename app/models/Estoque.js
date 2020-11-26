@@ -2,23 +2,26 @@ const mongoose = require('mongoose');
 
 module.exports = (app) => {
     const schema = mongoose.Schema({
-        'dbref': {
+        dbref: {
             type: mongoose.Schema.ObjectId,
             ref: 'Produto',
-            required: true
+            required: [true, "É obrigatório o id do Produto"]
         },
-        'qtdEstoque': {
+        qtdEstoque: {
             type: Number,
-            required: true,
+            required: [true, "É obrigatório informar a quantidade de produto em estoque"],
             min: [0, 'Valor deve ser sempre positivo']
         },
-        'qtdMinEstoque': {
+        qtdMinEstoque: {
             type: Number,
-            required: true,
-            min: [1, 'Deve conter 1 ou mais produtos em estoque']
-            
+            required:  [true, "É obrigatório informar a quantidade minima de produto no estoque"],
+            min: [1, 'Deve conter 1 ou mais produtos em estoque']   
         },
-        'created': {
+        created: {
+            type: Date,
+            default: Date.now(),
+        },
+        updated: {
             type: Date,
             default: Date.now(),
         }
