@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 mongoose.set('debug', true);
 module.exports = function (uri) {
     mongoose.Promise = global.Promise;
-    mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
     // cria eventos
     // quando estabelecer conexao
     mongoose.connection.on('connected', function () {
