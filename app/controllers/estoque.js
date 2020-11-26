@@ -31,17 +31,33 @@ module.exports = function (app) {
     );
   }
 
-  controller.alteraEstoque = (req, res) => {
-    var _id = req.body._id;
-    estoque.findByIdAndUpdate(_id, req.body).exec().then(
-      (estoque) => {
-        res.status(200).json(estoque);
-      },
-      (erro) => {
-        console.error(erro);
-        res.status(500).json(erro);
+  controller.alteraEstoque = async (req, res) => {
+    const {_id, dbref, qtdEstoque, qtdMinEstoque} = req.body;
+
+    try {
+      // pesquisa pelo id
+      let temEstoque = await estoque.findById(_id).exec();
+      // verifica se o id existe 
+      if (!temEstoque){
+        res.status(404).json({"message": "Nem um produto foi encontrado em estoque"});
+        return;
       }
-    );
+
+      // começa a alteração
+      let documentUpdate = {
+        dbref,
+        qtdEstoque,
+        qtdMinEstoque,
+        updated: Date.now()
+      };
+      
+      let updated = await estoque.updateOne({ _id }, documentUpdate);
+      res.status(200).json(updated);
+      
+    } catch (error) {
+      res.status(500).json(error);
+    }
+
   }
 
   controller.obtemEstoque = function (req, res) {
