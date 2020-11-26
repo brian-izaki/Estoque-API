@@ -81,7 +81,8 @@ module.exports = function (app){
           // é necessário dar return pois assim termina a execução da função
           return res.status(404).send({"message": "Este id não existe na base de dados" })
         }
-        res.status(200).json(sucess)
+        // status 204 é pra confirmar a exclusão e que não precisa de mais nenguma informação
+        res.status(204).end();
       },
       (error) => {
         res.status(500).json(error)
