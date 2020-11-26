@@ -33,6 +33,9 @@ module.exports = function (app){
 
     retirada.findOne({_id}).populate('dbRefProduto').exec().then(
       (sucess) => {
+        if(!sucess)
+          return res.status(404).send({'message': 'Item não encontrado!'})
+
         res.status(200).json(sucess)
       }, 
       (error) => {
@@ -48,10 +51,8 @@ module.exports = function (app){
       // pesquisa pelo id
       let temRetirada = await retirada.findById(_id).exec();
       // verifica se o id existe 
-      if (!temRetirada){
-        res.status(404).json({"message": "retirada não encontrada"});
-        return;
-      }
+      if (!temRetirada)
+        return res.status(404).json({"message": "retirada não encontrada"});
 
       // começa a alteração
       let documentUpdate = {
@@ -71,9 +72,15 @@ module.exports = function (app){
   }
 
   controller.removeRetirada = (req, res) => {
+
     const _id = req.params.id;
-    retirada.remove({_id}).exec().then(
+
+    retirada.findOneAndRemove({_id}).exec().then(
       (sucess) => {
+        if(!sucess){
+          // é necessário dar return pois assim termina a execução da função
+          return res.status(404).send({"message": "Este id não existe na base de dados" })
+        }
         res.status(200).json(sucess)
       },
       (error) => {
