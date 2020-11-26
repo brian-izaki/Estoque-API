@@ -18,7 +18,7 @@ module.exports = function (app){
       }
       
       controller.listaCategoria = function (req, res) {
-        estoque.find().exec().then(
+        categoria.find().exec().then(
           // em caso de sucesso
           function (categoria) {
             res.status(200).json(categoria);
@@ -67,7 +67,7 @@ module.exports = function (app){
         var _id = req.params.id;
         categoria.findByIdAndRemove(_id, req.params).exec().then(
           (sucess) => {
-            res.status(200).json(sucess)
+            res.status(204).end()
           },
           (error) => {
             res.status(500).json(error)
