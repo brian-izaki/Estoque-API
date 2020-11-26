@@ -18,7 +18,7 @@ module.exports = function (app){
   }
 
   controller.listarRetiradas = (req, res) => {
-    retirada.find({}).exec().then(
+    retirada.find({}).populate('dbRefProduto').exec().then(
       (sucess) => {
         res.status(200).json(sucess)
       },
@@ -31,7 +31,7 @@ module.exports = function (app){
   controller.obtemRetirada = (req, res) => {
     const _id = req.params.id;
 
-    retirada.findOne({_id}).exec().then(
+    retirada.findOne({_id}).populate('dbRefProduto').exec().then(
       (sucess) => {
         res.status(200).json(sucess)
       }, 
